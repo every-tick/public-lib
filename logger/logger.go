@@ -26,46 +26,31 @@ const (
 type Field = zap.Field
 
 func (l *Logger) Debugf(template string, args ...any) {
-	var fields []zap.Field
-	for _, a := range args {
-		f := zap.Any(template, a)
-		fields = append(fields, f)
-	}
-	l.l.Debug(template, fields...)
+	l.l.Sugar().Debugf(template, args)
 }
 
 func (l *Logger) Infof(template string, args ...any) {
-	var fields []zap.Field
-	for _, a := range args {
-		f := zap.Any(template, a)
-		fields = append(fields, f)
-	}
-	l.l.Info(template, fields...)
+	l.l.Sugar().Infof(template, args)
 }
 
-func (l *Logger) Warnf(msg string, fields ...Field) {
-	l.l.Warn(msg, fields...)
+func (l *Logger) Warnf(template string, args ...any) {
+	l.l.Sugar().Warnf(template, args)
 }
 
 func (l *Logger) Errorf(template string, args ...any) {
-	var fields []zap.Field
-	for _, a := range args {
-		f := zap.Any(template, a)
-		fields = append(fields, f)
-	}
-	l.l.Error(template, fields...)
+	l.l.Sugar().Errorf(template, args)
 }
 
-func (l *Logger) DPanicf(msg string, fields ...Field) {
-	l.l.DPanic(msg, fields...)
+func (l *Logger) DPanicf(template string, args ...any) {
+	l.l.Sugar().DPanicf(template, args)
 }
 
-func (l *Logger) Panicf(msg string, fields ...Field) {
-	l.l.Panic(msg, fields...)
+func (l *Logger) Panicf(template string, args ...any) {
+	l.l.Sugar().Panicf(template, args)
 }
 
-func (l *Logger) Fatalf(msg string, fields ...Field) {
-	l.l.Fatal(msg, fields...)
+func (l *Logger) Fatalf(template string, args ...any) {
+	l.l.Sugar().Fatalf(template, args)
 }
 
 // function variables for all field types
