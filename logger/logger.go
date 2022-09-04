@@ -25,20 +25,35 @@ const (
 
 type Field = zap.Field
 
-func (l *Logger) Debugf(msg string, fields ...Field) {
-	l.l.Debug(msg, fields...)
+func (l *Logger) Debugf(template string, args ...any) {
+	var fields []zap.Field
+	for _, a := range args {
+		f := zap.Any(template, a)
+		fields = append(fields, f)
+	}
+	l.l.Debug(template, fields...)
 }
 
-func (l *Logger) Infof(msg string, fields ...Field) {
-	l.l.Info(msg, fields...)
+func (l *Logger) Infof(template string, args ...any) {
+	var fields []zap.Field
+	for _, a := range args {
+		f := zap.Any(template, a)
+		fields = append(fields, f)
+	}
+	l.l.Info(template, fields...)
 }
 
 func (l *Logger) Warnf(msg string, fields ...Field) {
 	l.l.Warn(msg, fields...)
 }
 
-func (l *Logger) Errorf(msg string, fields ...Field) {
-	l.l.Error(msg, fields...)
+func (l *Logger) Errorf(template string, args ...any) {
+	var fields []zap.Field
+	for _, a := range args {
+		f := zap.Any(template, a)
+		fields = append(fields, f)
+	}
+	l.l.Error(template, fields...)
 }
 
 func (l *Logger) DPanicf(msg string, fields ...Field) {
